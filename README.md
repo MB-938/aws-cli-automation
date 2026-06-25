@@ -11,6 +11,7 @@
 ![AWS CLI](https://img.shields.io/badge/AWS-CLI-orange?logo=amazonaws)
 ![EC2](https://img.shields.io/badge/AWS-EC2-orange?logo=amazonaws)
 ![IAM](https://img.shields.io/badge/AWS-IAM-orange?logo=amazonaws)
+![VPC](https://img.shields.io/badge/AWS-VPC-orange?logo=amazonaws)
 
 ---
 
@@ -31,6 +32,14 @@
 - Génération de clés d'accès programmatiques
 - Basculement entre contextes IAM via variables d'environnement
 
+### Réseau via CLI
+- Création d'un VPC avec bloc CIDR personnalisé
+- Création d'un subnet public dans une availability zone
+- Création et attachement d'une Internet Gateway
+- Création d'une route table, ajout d'une route par défaut vers l'IGW et association au subnet
+- Activation de l'auto-assignation d'IP publique sur le subnet
+- Suppression complète de l'infrastructure réseau dans le bon ordre
+
 ## EN — What was done
 
 ### EC2 via CLI
@@ -48,6 +57,14 @@
 - Generated programmatic access keys
 - Switched between IAM contexts via environment variables
 
+### Networking via CLI
+- Created a VPC with a custom CIDR block
+- Created a public subnet in a specific availability zone
+- Created and attached an Internet Gateway
+- Created a route table, added a default route to the IGW, and associated it to the subnet
+- Enabled auto-assign public IP on the subnet
+- Cleaned up the full network infrastructure in the correct deletion order
+
 ---
 
 ## FR — Concepts clés
@@ -59,6 +76,9 @@
 | ARN | Identifiant unique d'une ressource AWS (`arn:aws:service::account-id:resource`) |
 | `/32` CIDR | Restriction d'accès à une seule adresse IP |
 | Env vars IAM | Surchargent `~/.aws/credentials` pour la session shell en cours uniquement |
+| VPC | Réseau isolé dans AWS — point de départ obligatoire avant tout déploiement |
+| IGW | Internet Gateway — seule passerelle permettant au VPC d'atteindre internet |
+| Route Table | Définit où envoyer le trafic réseau — doit être associée au subnet |
 
 ## EN — Key Concepts
 
@@ -69,12 +89,6 @@
 | ARN | Unique identifier for an AWS resource (`arn:aws:service::account-id:resource`) |
 | `/32` CIDR | Restricts access to a single IP address |
 | IAM env vars | Override `~/.aws/credentials` for the current shell session only |
-
----
-
-## Files
-
-| File | Description |
-|---|---|
-| `README.md` | Step-by-step guide with all commands and explanations |
-| `aws-cli-commands.md` | Quick reference command cheatsheet |
+| VPC | Isolated network in AWS — mandatory starting point before any deployment |
+| IGW | Internet Gateway — the only component that connects a VPC to the public internet |
+| Route Table | Defines where to send network traffic — must be associated with the subnet |
